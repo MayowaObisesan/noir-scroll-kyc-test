@@ -12,6 +12,7 @@
     "test": "NODE_OPTIONS='--experimental-loader ts-node/esm/transpile-only' hardhat test"
   },
   "dependencies": {
+    "@aztec/bb.js": "^0.35.1",
     "@noir-lang/backend_barretenberg": "^0.25.0",
     "@noir-lang/noir_js": "^0.25.0",
     "@noir-lang/noir_wasm": "^0.25.0",
@@ -45,5 +46,63 @@
   },
   "engines": {
     "node": "^20.10.0"
+  },
+  "Transform": "AWS::Serverless-2016-10-31",
+  "Resources": {
+    "Api": {
+      "Type": "AWS::Serverless::Api",
+      "Properties": {
+        "Name": {
+          "Fn::Sub": [
+            "${ResourceName} From Stack ${AWS::StackName}",
+            {
+              "ResourceName": "Api"
+            }
+          ]
+        },
+        "StageName": "Prod",
+        "DefinitionBody": {
+          "openapi": "3.0",
+          "info": {},
+          "paths": {
+            "/": {
+              "get": {
+                "responses": {}
+              }
+            }
+          }
+        },
+        "EndpointConfiguration": "REGIONAL",
+        "TracingEnabled": true
+      }
+    },
+    "Function": {
+      "Type": "AWS::Serverless::Function",
+      "Properties": {
+        "Description": {
+          "Fn::Sub": [
+            "Stack ${AWS::StackName} Function ${ResourceName}",
+            {
+              "ResourceName": "Function"
+            }
+          ]
+        },
+        "CodeUri": "src/Function",
+        "Handler": "index.handler",
+        "Runtime": "nodejs20.x",
+        "MemorySize": 3008,
+        "Timeout": 30,
+        "Tracing": "Active"
+      }
+    },
+    "FunctionLogGroup": {
+      "Type": "AWS::Logs::LogGroup",
+      "DeletionPolicy": "Retain",
+      "Properties": {
+        "LogGroupName": {
+          "Fn::Sub": "/aws/lambda/${Function}"
+        }
+      }
+    }
   }
 }

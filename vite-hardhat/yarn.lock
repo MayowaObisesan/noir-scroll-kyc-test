@@ -22,6 +22,16 @@
     debug "^4.3.4"
     tslib "^2.4.0"
 
+"@aztec/bb.js@^0.35.1":
+  version "0.35.1"
+  resolved "https://registry.yarnpkg.com/@aztec/bb.js/-/bb.js-0.35.1.tgz#df011e3e3168a5f631617072fd4bba40b4bde9a9"
+  integrity sha512-EWBDxj7fY7p4BP9zhVoHPmCd+h0HFBCy02DhI3p/CkgbuXHMy1wb0aIxJyQDzi+z7FrA6QME4SOzIx//ITRCCA==
+  dependencies:
+    comlink "^4.4.1"
+    commander "^10.0.1"
+    debug "^4.3.4"
+    tslib "^2.4.0"
+
 "@babel/runtime@^7.17.2", "@babel/runtime@^7.23.4":
   version "7.23.9"
   resolved "https://registry.yarnpkg.com/@babel/runtime/-/runtime-7.23.9.tgz#47791a15e4603bb5f905bc0753801cf21d6345f7"
