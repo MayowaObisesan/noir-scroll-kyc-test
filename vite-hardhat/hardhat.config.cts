@@ -34,6 +34,10 @@ const config: HardhatUserConfig = {
     localhost: {
       url: 'http://127.0.0.1:8545',
     },
+    "scroll-testnet": {
+      url: 'https://sepolia-rpc.scroll.io',
+      accounts: [process.env.PRIVATE_KEY as string]
+    }
   },
   paths: {
     sources: './circuit',

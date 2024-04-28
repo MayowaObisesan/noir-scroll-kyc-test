@@ -17,6 +17,7 @@ export function useOnChainVerification(proofData?: ProofData) {
   });
 
   const [onChainToast, setOnChainToast] = useState<Id>(0);
+  console.log('Onchain verif proof', proofData);
 
   useEffect(() => {
     if (!proofData || !isConnected) {
